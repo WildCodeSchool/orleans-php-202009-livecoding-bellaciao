@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100;200;300;500&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;1,400&display=swap');
+
+:root {
+    --main-color: #338FA4;
+    --secondary-color: #364850;
+    --light: #FBFBFB;
+
+    --spacing: 8px;
+    --spacing-2: calc(var(--spacing) * 2);
+    --spacing-3: calc(var(--spacing) * 3);
+    --spacing-4: calc(var(--spacing) * 4);
+
+    --text-font:'Raleway', sans-serif;
+    --title-font:'Advent Pro', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--text-font);
+    margin:0;
+}
+
+h1,h2,h3,h4 {
+    font-family: var(--title-font);
+}
+
