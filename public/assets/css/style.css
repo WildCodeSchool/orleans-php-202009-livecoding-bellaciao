@@ -23,7 +23,6 @@
 body {
     font-family: var(--text-font);
     margin:0;
-    padding-top: calc(var(--navbar-height) + var(--spacing-2));
 }
 
 h1,h2,h3,h4 {
@@ -31,10 +30,14 @@ h1,h2,h3,h4 {
     color: var(--main-color);
 }
 
-.navbar {
-    background-color: var(--main-color);
+h1 {
+    font-size: 80pt;
+    font-weight: 500;
+}
+h2 {
+    font-size: 48pt;
 }
 
-.navbar .logo {
-    height: calc(var(--navbar-height) - var(--spacing-2));
+.btn {
+    border-radius: 40px;
 }

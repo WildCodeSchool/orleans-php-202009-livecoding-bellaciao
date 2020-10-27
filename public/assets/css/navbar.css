@@ -1,0 +1,5 @@
+
+
+.navbar .logo {
+    height: calc(var(--navbar-height) - var(--spacing-2));
+}
