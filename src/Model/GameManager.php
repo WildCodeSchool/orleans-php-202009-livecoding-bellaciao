@@ -15,4 +15,13 @@ class GameManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
+
+    public function selectWithCategory()
+    {
+        return $this->pdo->query(
+            'SELECT g.*, c.name as category ' .
+            'FROM ' . self::TABLE . ' g ' .
+            'JOIN category c ON g.category_id=c.id'
+        )->fetchAll();
+    }
 }

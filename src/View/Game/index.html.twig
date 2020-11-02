@@ -22,6 +22,7 @@
                     <img src="{{ game.image }}" class="card-img-top" alt="{{ game.name }}">
                     <div class="card-body">
                         <h2 class="card-title">{{ game.name }}</h2>
+                        <div class="badge badge-primary">{{ game.category }}</div>
                         <p class="card-text">{{ game.price ?? '0' }}€</p>
                         <a href="/game/show/{{ game.id }}" class="btn btn-primary">Détail du jeu</a>
                     </div>

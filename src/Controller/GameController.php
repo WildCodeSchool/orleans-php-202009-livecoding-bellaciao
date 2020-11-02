@@ -24,7 +24,7 @@ class GameController extends AbstractController
     public function index()
     {
         $gameManager = new GameManager();
-        $games = $gameManager->selectAll();
+        $games = $gameManager->selectWithCategory();
 
         return $this->twig->render('Game/index.html.twig', [
             'games' => $games,
