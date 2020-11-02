@@ -25,6 +25,7 @@ class GameController extends AbstractController
     {
         $gameManager = new GameManager();
         $games = $gameManager->selectAll();
+
         return $this->twig->render('Game/index.html.twig', [
             'games' => $games,
         ]);
@@ -34,9 +35,9 @@ class GameController extends AbstractController
     {
         $gameManager = new GameManager();
         $game = $gameManager->selectOneById($id);
+
         return $this->twig->render('Game/show.html.twig', [
             'game' => $game,
         ]);
-
     }
 }
