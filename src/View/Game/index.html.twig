@@ -15,19 +15,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        {% for game in games %}
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card">
-                    <img src="{{ game.image }}" class="card-img-top" alt="{{ game.name }}">
-                    <div class="card-body">
-                        <h2 class="card-title">{{ game.name }}</h2>
-                        <div class="badge badge-primary">{{ game.category }}</div>
-                        <p class="card-text">{{ game.price ?? '0' }}€</p>
-                        <a href="/game/show/{{ game.id }}" class="btn btn-primary">Détail du jeu</a>
+    <main class="container">
+        <div class="row my-5">
+            {% for game in games %}
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card">
+                        <img src="{{ game.image }}"  class="card-img-top"  alt=""/>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ game.name }}</h2>
+                            <div class="badge badge-pill badge-secondary">{{ game.category }}</div>
+                            <p class="card-text price">{{ game.price ?? '0' }}€</p>
+                            <a href="/game/show/{{ game.id }}" class="btn btn-light">Détail du jeu</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock %}

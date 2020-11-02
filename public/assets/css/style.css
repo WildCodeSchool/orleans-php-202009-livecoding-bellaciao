@@ -2,7 +2,9 @@
 
 :root {
     --main-color: #338FA4;
+    --main-color-transparent: #338fa460;
     --secondary-color: #364850;
+    --shadow-color: #d9d9d9;
     --light: #FBFBFB;
 
     --spacing: 8px;
@@ -12,6 +14,10 @@
 
     --text-font:'Raleway', sans-serif;
     --title-font:'Advent Pro', sans-serif;
+
+    --text-size: 16pt;
+    --subtitle-size: 20pt;
+    --title-size: 24pt;
 
     --navbar-height: 70px;
 }
@@ -40,4 +46,84 @@ h2 {
 
 .btn {
     border-radius: 40px;
+}
+
+header {
+    --header-height: 300px;
+    --header-height-with-navbar: calc(var(--header-height) + var(--navbar-height) + var(--spacing-2));
+    padding-top: calc(var(--navbar-height) + var(--spacing-2));
+    height: var(--header-height-with-navbar);
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-image: url('../images/main_background.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+header h1, header h2 {
+    color: var(--light);
+}
+
+.card {
+    --card-height:300px;
+    border-radius: 0;
+    border:none;
+    box-shadow: 2px 2px 5px -2px var(--shadow-color);
+    padding: var(--spacing);
+    background-color: var(--main-color-transparent);
+    position:relative;
+    min-height: var(--card-height);
+    font-size: var(--text-size);
+    overflow: hidden;
+}
+
+.card h2 {
+    font-size: var(--title-size);
+    color: var(--light);
+    text-shadow: 1px 1px 2px var(--secondary-color);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.card img {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.card .btn {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.card:hover .btn {
+    opacity:100;
+    transform: translateY(0px);
+    transition: transform 0.6s ease-in-out;
+}
+
+.card:hover {
+    background-color: transparent;
+    transition: background-color 0.6s ease-in-out;
+    box-shadow: 2px 2px 7px -3px var(--shadow-color);
+}
+
+.card:hover h2, .card:hover .price, .card:hover .badge {
+    opacity: 0;
+}
+
+
+.card .price {
+    font-size: var(--subtitle-size);
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+.label-secondary {
+    var(--secondary-color);
 }

@@ -16,7 +16,7 @@
 
 {% block content %}
     <div class="container">
-        <img src="{{ game.image ?? 'https://www.flaticon.com/svg/static/icons/svg/3286/3286008.svg' }}" alt="{{ game.name }}"/>
+        <img src="{{ game.image ?? '/assets/images/board-games.svg' }}" alt="{{ game.name }}"/>
         <div>{{ game.playerNumber }}</div>
         <div>{{ game.price }}</div>
         <p>{{ game.description }}</p>
