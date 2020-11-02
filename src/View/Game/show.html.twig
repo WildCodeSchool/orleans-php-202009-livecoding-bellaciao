@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }} | Description jeu{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="assets/css/game.css">
+{% endblock %}
+
+{% block header %}
+    <header>
+        <div class="title">
+            <h1>{{ game.name }}</h1>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <img src="{{ game.image ?? 'https://www.flaticon.com/svg/static/icons/svg/3286/3286008.svg' }}" alt="{{ game.name }}"/>
+        <div>{{ game.playerNumber }}</div>
+        <div>{{ game.price }}</div>
+        <p>{{ game.description }}</p>
+    </div>
+
+    <a href="/game/index" class="btn btn-secondary">Retour aux jeux</a>
+{% endblock %}

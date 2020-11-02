@@ -29,4 +29,14 @@ class GameController extends AbstractController
             'games' => $games,
         ]);
     }
+
+    public function show(int $id)
+    {
+        $gameManager = new GameManager();
+        $game = $gameManager->selectOneById($id);
+        return $this->twig->render('Game/show.html.twig', [
+            'game' => $game,
+        ]);
+
+    }
 }
