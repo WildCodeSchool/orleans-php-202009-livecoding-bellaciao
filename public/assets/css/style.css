@@ -127,3 +127,7 @@ header h1, header h2 {
 .label-secondary {
     var(--secondary-color);
 }
+
+.alert:empty {
+    display: none;
+}
