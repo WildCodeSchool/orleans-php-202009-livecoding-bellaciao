@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: root
@@ -33,8 +34,8 @@ abstract class AbstractController
         $this->twig = new Environment(
             $loader,
             [
-                'cache' => !APP_DEV,
-                'debug' => APP_DEV,
+                'cache' => ENV == 'dev' ? false : APP_CACHE_PATH,
+                'debug' => ENV == 'dev' ? true : false,
             ]
         );
         $this->twig->addExtension(new DebugExtension());
