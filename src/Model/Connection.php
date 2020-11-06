@@ -61,7 +61,7 @@ class Connection
             $this->pdoConnection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
             // show errors in DEV environment
-            if (APP_DEV) {
+            if (ENV === 'dev') {
                 $this->pdoConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         } catch (\PDOException $e) {
