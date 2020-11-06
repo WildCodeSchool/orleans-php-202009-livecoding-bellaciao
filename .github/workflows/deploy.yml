@@ -18,4 +18,4 @@ jobs:
         with:
           server: 'https://captain.phprover.wilders.dev'
           password: '${{ secrets.CAPROVER_PASSWORD }}'
-          appname: 'orleans-php-2009-projet2-bellaciao'
+          appname: '${{ secrets.CAPROVER_APP_NAME }}'
