@@ -47,10 +47,10 @@ class Connection
      */
     public function __construct()
     {
-        $this->user = APP_DB_USER;
-        $this->host = APP_DB_HOST;
-        $this->password = APP_DB_PWD;
-        $this->dbName = APP_DB_NAME;
+        $this->user = getenv('APP_DB_USER') ? getenv('APP_DB_USER') : APP_DB_USER;
+        $this->host = getenv('APP_DB_HOST') ? getenv('APP_DB_HOST') :APP_DB_HOST;
+        $this->password = getenv('APP_DB_PWD') ? getenv('APP_DB_PWD') :APP_DB_PWD;
+        $this->dbName = getenv('APP_DB_NAME') ? getenv('APP_DB_NAME') :APP_DB_NAME;
 
         try {
             $this->pdoConnection = new PDO(
