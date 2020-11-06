@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Database connection
  *
@@ -11,7 +12,7 @@
 
 namespace App\Model;
 
-use \PDO;
+use PDO;
 
 /**
  *
@@ -46,17 +47,11 @@ class Connection
      */
     public function __construct()
     {
-        if (getenv('ENV') === 'prod') {
-            $this->user = getenv('DB_USER');
-            $this->host = getenv('DB_HOST');
-            $this->password = getenv('DB_PASSWORD');
-            $this->dbName = getenv('DB_NAME');
-        } else {
-            $this->user = APP_DB_USER;
-            $this->host = APP_DB_HOST;
-            $this->password = APP_DB_PWD;
-            $this->dbName = APP_DB_NAME;
-        }
+        $this->user = APP_DB_USER;
+        $this->host = APP_DB_HOST;
+        $this->password = APP_DB_PWD;
+        $this->dbName = APP_DB_NAME;
+
         try {
             $this->pdoConnection = new PDO(
                 'mysql:host=' . $this->host . '; dbname=' . $this->dbName . '; charset=utf8',
