@@ -34,7 +34,7 @@ abstract class AbstractController
         $this->twig = new Environment(
             $loader,
             [
-                'cache' => ENV == 'dev' ? false : APP_CACHE_PATH,
+                'cache' => false,
                 'debug' => ENV == 'dev' ? true : false,
             ]
         );
