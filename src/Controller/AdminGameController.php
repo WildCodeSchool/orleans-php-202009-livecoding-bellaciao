@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AbstractController;
 use App\Model\CategoryManager;
 use App\Model\GameManager;
+use App\Utils\Validation;
 
 class AdminGameController extends AbstractController
 {
@@ -45,29 +46,15 @@ class AdminGameController extends AbstractController
     {
         $errors = [];
 
-        if (empty($game['name'])) {
-            $errors[] = 'Le nom est obligatoire';
-        }
-        $length = 100;
-        if (strlen($game['name']) > $length) {
-            $errors[] = 'Le nom ne doit pas dépasser ' . $length . ' caractères';
-        }
-        if (!empty($game['player_number']) && $game['player_number'] < 0) {
-            $errors[] = 'Le nombre de joueur doit être positif';
-        }
-        if (!empty($game['price']) && $game['price'] < 0) {
-            $errors[] = 'Le prix doit être positif';
-        }
+        $validation = new Validation();
+        $errors[] = $validation->required('name', $game['name']);
+        $errors[] = $validation->maxLength('name', $game['name'], 100);
+        $errors[] = $validation->moreThan('price', $game['price'], 0);
+        $errors[] = $validation->moreThan('nombre de joueurs', $game['player_number'], 0);
         if (!empty($game['image']) && !filter_var($game['image'], FILTER_VALIDATE_URL)) {
             $errors[] = 'L\'image doit être une URL valide';
         }
 
-//        $categoryManager = new CategoryManager();
-//        $categories = $categoryManager->selectAll();
-//        $categorieIds = array_column($categories, 'id');
-//        if(!in_array($game['category'], $categorieIds)) {
-//            $errors[] = 'La catégorie n\'est pas valide';
-//        }
         return $errors ?? [];
     }
 }
