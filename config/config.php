@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file define config constants .
  *
@@ -9,8 +10,7 @@
  * @link     https://github.com/WildCodeSchool/simple-mvc
  */
 
-
-define('APP_DEV', true);
+define('ENV', getenv('ENV') ? getenv('ENV') : 'dev');
 
 //Model (for connexion data, see unversionned db.php)
 //VIew
