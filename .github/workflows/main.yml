@@ -39,10 +39,3 @@ jobs:
           ./vendor/bin/phpcs
           ./vendor/bin/phpstan analyse src --level 5
           ./vendor/bin/phpmd src text phpmd.xml
-
-      - name: deploy
-        uses: AlexxNB/caprover-action@v1
-        with:
-          server: 'https://captain.phprover.wilders.dev'
-          password: '${{ secrets.CAPROVER_PASSWORD }}'
-          appname: '${{ secrets.CAPROVER_APP_NAME }}'
