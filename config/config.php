@@ -10,7 +10,7 @@
  * @link     https://github.com/WildCodeSchool/simple-mvc
  */
 
-define('ENV', getenv('ENV') ? getenv('ENV') : 'dev');
+define('APP_DEV', true);
 
 //Model (for connexion data, see unversionned db.php)
 //VIew

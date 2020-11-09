@@ -47,21 +47,28 @@ class Connection
      */
     public function __construct()
     {
-        $this->user = getenv('APP_DB_USER') ? getenv('APP_DB_USER') : APP_DB_USER;
-        $this->host = getenv('APP_DB_HOST') ? getenv('APP_DB_HOST') : APP_DB_HOST;
-        $this->password = getenv('APP_DB_PWD') ? getenv('APP_DB_PWD') : APP_DB_PWD;
-        $this->dbName = getenv('APP_DB_NAME') ? getenv('APP_DB_NAME') : APP_DB_NAME;
-
+        if (getenv('ENV') === 'prod') {
+            $this->user = getenv('DB_USER');
+            $this->host = getenv('DB_HOST');
+            $this->password = getenv('DB_PASSWORD');
+            $this->dbName = getenv('DB_NAME');
+        } else {
+            $this->user = APP_DB_USER;
+            $this->host = APP_DB_HOST;
+            $this->password = APP_DB_PWD;
+            $this->dbName = APP_DB_NAME;
+        }
         try {
             $this->pdoConnection = new PDO(
                 'mysql:host=' . $this->host . '; dbname=' . $this->dbName . '; charset=utf8',
                 $this->user,
                 $this->password
             );
+
             $this->pdoConnection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
             // show errors in DEV environment
-            if (ENV === 'dev') {
+            if (APP_DEV) {
                 $this->pdoConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         } catch (\PDOException $e) {
