@@ -28,7 +28,8 @@ class GameController extends AbstractController
         $games = $gameManager->selectWithCategory();
 
         return $this->twig->render('Game/index.html.twig', [
-            'games' => $games,
+            'games'     => $games,
+            'favorites' => $_SESSION['favorites'] ?? [],
         ]);
     }
 
@@ -40,5 +41,18 @@ class GameController extends AbstractController
         return $this->twig->render('Game/show.html.twig', [
             'game' => $game,
         ]);
+    }
+
+    public function favorized(int $id)
+    {
+        $gameManager = new GameManager();
+        $game = $gameManager->selectOneById($id);
+
+        if (key_exists($id, $_SESSION['favorites'])) {
+            unset($_SESSION['favorites'][$id]);
+        } else {
+            $_SESSION['favorites'][$id] = $game;
+        }
+        header("Location: /game/index");
     }
 }
