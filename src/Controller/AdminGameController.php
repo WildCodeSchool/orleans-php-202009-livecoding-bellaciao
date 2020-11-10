@@ -55,8 +55,9 @@ class AdminGameController extends AbstractController
         $errors = [];
 
         $validator = new Validator('nom', $game['name']);
-        $validator->required();
-        $validator->shorterThan(255);
+        $validator
+            ->required()
+            ->shorterThan(255);
         $nameErrors = $validator->getErrors();
 
         $validator = new Validator('nombre de joueurs', $game['player_number']);

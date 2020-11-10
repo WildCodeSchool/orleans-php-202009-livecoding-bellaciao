@@ -16,11 +16,13 @@ class Validator
         $this->input = $input;
     }
 
-    public function required()
+    public function required(): self
     {
         if (empty($this->getInput())) {
             $this->errors[] = 'Le champ ' . $this->getName() . ' est obligatoire';
         }
+
+        return $this;
     }
 
     /**
@@ -61,25 +63,31 @@ class Validator
         return $this;
     }
 
-    public function shorterThan(int $length)
+    public function shorterThan(int $length): self
     {
         if (strlen($this->getInput()) > $length) {
             $this->errors[] = 'Le champ ' . $this->getName() . ' doit faire moins de ' . $length . ' caractères';
         }
+
+        return $this;
     }
 
-    public function moreThan(float $min)
+    public function moreThan(float $min): self
     {
         if ($this->input <= $min) {
             $this->errors[] = 'Le champ ' . $this->getName() . ' doit être supérieur à  ' . $min;
         }
+
+        return $this;
     }
 
-    public function moreOrEqualThan(float $min)
+    public function moreOrEqualThan(float $min): self
     {
         if ($this->input < $min) {
             $this->errors[] = 'Le champ ' . $this->getName() . ' doit être supérieur ou égal à  ' . $min;
         }
+
+        return $this;
     }
 
     /**
