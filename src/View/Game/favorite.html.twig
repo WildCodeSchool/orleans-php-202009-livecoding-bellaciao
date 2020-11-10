@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }} | Jeux favoris{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="assets/css/game.css">
+{% endblock %}
+
+{% block header %}
+    <header>
+        <div class="title">
+            <h1>Mes jeux favoris</h1>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <div class="row my-5">
+            {% for game in games %}
+                <div class="col-sm-4">
+                    <div class="">
+                        <div>{{ game.name }}</div>
+                        <a href="/game/favorized/{{ game.id }}">Retirer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

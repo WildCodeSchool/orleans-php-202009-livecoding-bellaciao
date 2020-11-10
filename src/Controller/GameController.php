@@ -55,4 +55,13 @@ class GameController extends AbstractController
         }
         header("Location: /game/index");
     }
+
+    public function favorite()
+    {
+        $games = $_SESSION['favorites'];
+
+        return $this->twig->render('Game/favorite.html.twig', [
+            'games' => $games,
+        ]);
+    }
 }
