@@ -5,9 +5,13 @@ namespace App\Controller;
 use App\Controller\AbstractController;
 use App\Model\CategoryManager;
 use App\Model\GameManager;
+use App\Service\Validator;
 
 class AdminGameController extends AbstractController
 {
+    public const MAX_FILE_SIZE = 1000000;
+    public const AUTHORIZED_MIMES = ['image/jpeg', 'image/png', 'image/gif'];
+
     public function index()
     {
         $gameManager = new GameManager();
@@ -25,8 +29,13 @@ class AdminGameController extends AbstractController
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $game = array_map('trim', $_POST);
-            $errors = $this->validateGame($game);
+            $errors = $this->validateGame($game, $_FILES['image']);
+
             if (empty($errors)) {
+                $filename = uniqid() . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $filename);
+                $game['image'] = $filename;
+
                 $gameManager = new GameManager();
                 $gameManager->insert($game);
 
@@ -41,33 +50,34 @@ class AdminGameController extends AbstractController
         ]);
     }
 
-    private function validateGame(array $game): array
+    private function validateGame(array $game, array $file): array
     {
         $errors = [];
 
-        if (empty($game['name'])) {
-            $errors[] = 'Le nom est obligatoire';
+        $validator = new Validator('nom', $game['name']);
+        $validator->required();
+        $validator->shorterThan(255);
+        $nameErrors = $validator->getErrors();
+
+        $validator = new Validator('nombre de joueurs', $game['player_number']);
+        $validator->moreThan(0);
+        $playerErrors = $validator->getErrors();
+
+        $validator = new Validator('prix', $game['price']);
+        $validator->moreThan(0);
+        $priceErrors = $validator->getErrors();
+
+        $errors = [...$nameErrors, ...$playerErrors, ...$priceErrors];
+
+        // taille
+        if ($file['size'] > self::MAX_FILE_SIZE) {
+            $errors[] = 'Le fichier ne doit pas excéder ' . self::MAX_FILE_SIZE / 1000000 . ' Mo';
         }
-        $length = 100;
-        if (strlen($game['name']) > $length) {
-            $errors[] = 'Le nom ne doit pas dépasser ' . $length . ' caractères';
-        }
-        if (!empty($game['player_number']) && $game['player_number'] < 0) {
-            $errors[] = 'Le nombre de joueur doit être positif';
-        }
-        if (!empty($game['price']) && $game['price'] < 0) {
-            $errors[] = 'Le prix doit être positif';
-        }
-        if (!empty($game['image']) && !filter_var($game['image'], FILTER_VALIDATE_URL)) {
-            $errors[] = 'L\'image doit être une URL valide';
+        // type mime
+        if (!empty($file['tmp_name']) && !in_array(mime_content_type($file['tmp_name']), self::AUTHORIZED_MIMES)) {
+            $errors[] = 'Ce type de fichier n\'est pas valide';
         }
 
-//        $categoryManager = new CategoryManager();
-//        $categories = $categoryManager->selectAll();
-//        $categorieIds = array_column($categories, 'id');
-//        if(!in_array($game['category'], $categorieIds)) {
-//            $errors[] = 'La catégorie n\'est pas valide';
-//        }
         return $errors ?? [];
     }
 }

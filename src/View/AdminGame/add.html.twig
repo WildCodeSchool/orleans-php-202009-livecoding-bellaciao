@@ -23,7 +23,7 @@
             {%- endfor -%}
         </ul>
 
-        <form action="" method="POST" class="mt-5" novalidate>
+        <form action="" method="POST" class="mt-5" enctype="multipart/form-data" novalidate>
             <div class="form-group">
                 <label for="name">Nom du jeu</label>
                 <input class="form-control" type="text" id="name" name="name" value="{{ game.name }}">
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="image">Image (optionnel)</label>
-                <input placeholder="http://monimage.com" class="form-control" type="url" min="0" id="image" name="image" value="{{ game.image }}">
+                <input  class="form-control" type="file"  name="image">
             </div>
 
             <div class="form-group">
