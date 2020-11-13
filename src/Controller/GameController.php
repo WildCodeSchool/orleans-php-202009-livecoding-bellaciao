@@ -13,7 +13,6 @@ use App\Model\GameManager;
 
 class GameController extends AbstractController
 {
-
     /**
      * Display home page
      *
