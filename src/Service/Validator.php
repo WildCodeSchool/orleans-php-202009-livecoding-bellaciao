@@ -90,6 +90,15 @@ class Validator
         return $this;
     }
 
+    public function isEmail(): self
+    {
+        if (!filter_var($this->getInput(), FILTER_VALIDATE_EMAIL)) {
+            $this->errors[] = 'Le champ ' . $this->getName() . ' doit être une adresse email valide';
+        }
+
+        return $this;
+    }
+
     /**
      * @return array
      */
