@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Service\Validator;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
@@ -14,6 +17,21 @@ class ContactController extends AbstractController
 
             if (empty($errors)) {
                 // mailer
+                // adresse de destination => admin@bellaciao.fr
+                // message
+                // nom + mail de l'expéditeur
+                // mail + password pour envoyer
+                $transport = Transport::fromDsn(MAILER_DSN);
+                $mailer = new Mailer($transport);
+                $email = (new Email())
+                    ->from($contact['email'])
+                    ->to(MAIL_TO)
+                    ->subject('Message du site web Bellaciao')
+                    ->html($this->twig->render('Contact/email.html.twig', [
+                        'contact' => $contact,
+                    ]));
+
+                $mailer->send($email);
                 header("Location: /");
             }
         }
