@@ -32,7 +32,10 @@ class ContactController extends AbstractController
                     ]));
 
                 $mailer->send($email);
+
+                $this->session->set('notification', 'Le mail a bien été envoyé');
                 header("Location: /");
+                return 'Redirection to home';
             }
         }
 

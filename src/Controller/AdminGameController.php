@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AbstractController;
 use App\Model\CategoryManager;
 use App\Model\GameManager;
+use App\Service\Session;
 use App\Service\Validator;
 
 class AdminGameController extends AbstractController
@@ -38,8 +39,9 @@ class AdminGameController extends AbstractController
 
                 $gameManager = new GameManager();
                 $gameManager->insert($game);
+                $this->session->set('notification', 'Le jeu a bien été créé');
 
-                header("Location: /adminGame/index");
+                header("Location: /adminGame/index/");
             }
         }
 

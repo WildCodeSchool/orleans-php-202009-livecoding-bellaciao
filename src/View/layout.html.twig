@@ -18,6 +18,9 @@
 
 {% block navbar %}{% include 'includes/_navbar.html.twig' %}{% endblock %}
 {% block header %}{% endblock %}
+{% block notification %}
+    <div class="alert alert-info">{{ session.flash('notification') }}</div>
+{% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}{% endblock %}
 
